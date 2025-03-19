@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Oliver - Portfolio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f5;
+            color: #222; /* Darkened from #333 */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #ccc;
+        }
+        .profile-info h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+        .profile-info p {
+            font-size: 1em;
+            color: #555; /* Unchanged for header */
+            margin-bottom: 8px;
+        }
+        .profile-info a {
+            color: #0077cc;
+            text-decoration: none;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        h1:not(.profile-info h1) {
+            color: #111; /* Darkened from inherited #333 */
+        }
+        .project {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+        .project-images {
+            width: 100%;
+            position: relative;
+            background-color: #fafafa;
+            min-height: 200px;
+            cursor: pointer;
+        }
+        .project-images img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+        .project-content {
+            width: 100%;
+            padding: 15px;
+        }
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #111; /* Darkened from #222 */
+        }
+        .project-title a {
+            color: #0077cc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .project-title a:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        .project-technologies {
+            font-size: 0.9em;
+            color: #555; /* Darkened from #777 */
+            margin-bottom: 10px;
+        }
+        .project-description {
+            font-size: 1em;
+            color: #333; /* Darkened from #555 */
+        }
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            width: 100%;
+            z-index: 10;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: #0077cc;
+        }
+        .dot:hover {
+            background-color: #005fa3;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #0077cc, #00aaff);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-button:hover {
+            background: linear-gradient(45deg, #005fa3, #0088cc);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            header {
+                padding: 20px;
+                margin-bottom: 40px;
+            }
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            .profile-info h1 {
+                font-size: 2.5em;
+            }
+            .profile-info p {
+                font-size: 1.1em;
+            }
+            .project {
+                flex-direction: row;
+                height: 400px;
+            }
+            .project-images {
+                width: 50%;
+                min-height: unset;
+            }
+            .project-images img {
+                height: 100%;
+                border-radius: 12px 0 0 12px;
+            }
+            .project-content {
+                width: 50%;
+                padding: 30px;
+            }
+            .project-title {
+                font-size: 1.8em;
+            }
+            .project-technologies {
+                font-size: 1em;
+            }
+            .project-description {
+                font-size: 1.1em;
+            }
+            .dots {
+                gap: 8px;
+                bottom: 15px;
+            }
+            .dot {
+                width: 12px;
+                height: 12px;
+            }
+            .nav-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+            .prev {
+                left: 15px;
+            }
+            .next {
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocIsfSpBCH4o97Pw102VtfXxJH04-SBWSZGkl_1CEzOQHfP4Mghh=s288-c-no" alt="Sam Oliver Profile" class="profile-img">
+            <div class="profile-info">
+                <h1>Sam Oliver</h1>
+                <p>Game Developer and Graphics Programmer with expertise in C#, C++ and Shader development.</p>
+                <p>
+                    <a href="https://x.com/samoliverdev">Twitter/X</a>
+                    <a href="https://github.com/samoliverdev">GitHub</a>
+                    <a href="https://store.steampowered.com/app/2225890/Neo_Shock/">Steam</a>
+                    <a href="https://samoliverdev.itch.io/">Itch.io</a>
+                    <a href="mailto:samoliverdev@gmail.com">Email</a>
+                </p>
+            </div>
+        </header>
+        <h1>Projects</h1>
+        <div id="projects-container"></div>
+    </div>
+    <script>
+        const projects = [
+            {
+                name: "Neo Shock",
+                link: "https://store.steampowered.com/app/2225890/Neo_Shock/",
+                technologies: "Unity C#",
+                description: "My first commercial game. An FPS with roguelike elements.",
+                images: [
+                    "ss_b67f534a5c718bb93d33bc9567f7830cb0549817.1920x1080.jpg",
+                    "ss_36c371599ba7a9bbd4c22fb29e2f9b5a66ec275e.1920x1080.jpg",
+                    "ss_83832bedb870ed0f5d75ba7ba5f5caa973bbd582.1920x1080.jpg",
+                    "ss_f3861162a0b62537d6c24b863f12b3783b8d61d9.1920x1080.jpg"
+                ]
+            },
+            {
+                name: "OneDudeEngine",
+                link: "https://github.com/samoliverdev/OneDudeEngine",
+                technologies: "C++ GLSL",
+                description: "My nameless game engine. In developement Game Engine inspired by The Unity Engine, write in c++ with focuses on high performace, be small and easy to use",
+                images: [
+                    "Screenshots_01.png",
+                    "Screenshots_02.png",
+                    "Screenshots_03.png"
+                ]
+            },
+            {
+                name: "Unity Shader Assets",
+                link: "https://assetstore.unity.com/publishers/52199",
+                technologies: "Unity HLSL",
+                description: "A Scan Effect (HDRP) and Simple Atmospheric Fog for URP",
+                images: [
+                    "c23fdb83-6f48-4818-82e8-41e713406b18.webp",
+                    "f148cdf0-a394-4ca6-9898-804e20d27ec0.webp"
+                ]
+            },
+            {
+                name: "Other Small Game(itch.io)",
+                link: "https://samoliverdev.itch.io/",
+                technologies: "Unity C#",
+                description: "My other small game that I made on Itch.io.",
+                images: [
+                    "ZXXcwu.gif",
+                    "vHNlVu.png",
+                    "KbAnIJ.png",
+                    "FfGlZB.png"
+                ]
+            }
+        ];
+
+        const proximity = 200;
+        const cycleTime = 1000;
+
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            projects.forEach(project => {
+                const projectDiv = document.createElement('div');
+                projectDiv.classList.add('project');
+                projectDiv.dataset.images = JSON.stringify(project.images);
+                projectDiv.dataset.currentIndex = 0;
+
+                const imagesDiv = document.createElement('div');
+                imagesDiv.classList.add('project-images');
+                imagesDiv.innerHTML = `
+                    <button class="nav-button prev" onclick="prevImage(this)">‹</button>
+                    <img src="${project.images[0]}" alt="${project.name} Image">
+                    <button class="nav-button next" onclick="nextImage(this)">›</button>
+                    <div class="dots"></div>
+                `;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('project-content');
+                contentDiv.innerHTML = `
+                    <h2 class="project-title"><a href="${project.link}">${project.name}</a></h2>
+                    ${project.technologies ? `<p class="project-technologies">${project.technologies}</p>` : ''}
+                    <p class="project-description">${project.description}</p>
+                `;
+
+                projectDiv.appendChild(imagesDiv);
+                projectDiv.appendChild(contentDiv);
+                container.appendChild(projectDiv);
+            });
+            initializeDots();
+            attachEventListeners();
+        }
+
+        function initializeDots() {
+            document.querySelectorAll('.project').forEach(project => {
+                const images = JSON.parse(project.dataset.images);
+                const dotsContainer = project.querySelector('.dots');
+                images.forEach((img, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const imgElement = project.querySelector('img');
+                        imgElement.src = images[index];
+                        project.dataset.currentIndex = index;
+                        updateActiveDot(project, index);
+                        clearInterval(project.dataset.interval);
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+            });
+        }
+
+        function updateActiveDot(project, activeIndex) {
+            const dots = project.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        function nextImage(button) {
+            const project = button.closest('.project');
+            const images = JSON.parse(project.dataset.images);
+            const imgElement = project.querySelector('img');
+            let currentIndex = parseInt(project.dataset.currentIndex) || 0;
+            const nextIndex = (currentIndex + 1) % images.length;
+            imgElement.src = images[nextIndex];
+            project.dataset.currentIndex = nextIndex;
+            updateActiveDot(project, nextIndex);
+            clearInterval(project.dataset.interval);
+        }
+
+        function prevImage(button) {
+            const project = button.closest('.project');
+            const images = JSON.parse(project.dataset.images);
+            const imgElement = project.querySelector('img');
+            let currentIndex = parseInt(project.dataset.currentIndex) || 0;
+            const prevIndex = (currentIndex - 1 + images.length) % images.length;
+            imgElement.src = images[prevIndex];
+            project.dataset.currentIndex = prevIndex;
+            updateActiveDot(project, prevIndex);
+            clearInterval(project.dataset.interval);
+        }
+
+        function startAutoCycle(project) {
+            const images = JSON.parse(project.dataset.images);
+            const imgElement = project.querySelector('img');
+            project.dataset.interval = setInterval(() => {
+                let currentIndex = parseInt(project.dataset.currentIndex) || 0;
+                const nextIndex = (currentIndex + 1) % images.length;
+                imgElement.src = images[nextIndex];
+                project.dataset.currentIndex = nextIndex;
+                updateActiveDot(project, nextIndex);
+            }, cycleTime);
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.project-images').forEach(imagesDiv => {
+                imagesDiv.addEventListener('mouseenter', () => {
+                    const project = imagesDiv.closest('.project');
+                    startAutoCycle(project);
+                });
+                imagesDiv.addEventListener('mouseleave', () => {
+                    const project = imagesDiv.closest('.project');
+                    clearInterval(project.dataset.interval);
+                });
+
+                imagesDiv.addEventListener('mousemove', (e) => {
+                    const rect = imagesDiv.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const width = rect.width;
+                    const prevButton = imagesDiv.querySelector('.prev');
+                    const nextButton = imagesDiv.querySelector('.next');
+
+                    const prevRect = prevButton.getBoundingClientRect();
+                    const nearPrevButton = e.clientX >= prevRect.left - 20 && e.clientX <= prevRect.right + 20 &&
+                                          e.clientY >= prevRect.top - 20 && e.clientY <= prevRect.bottom + 20;
+                    prevButton.style.opacity = (x < proximity || nearPrevButton) ? '0.9' : '0';
+
+                    const nextRect = nextButton.getBoundingClientRect();
+                    const nearNextButton = e.clientX >= nextRect.left - 20 && e.clientX <= nextRect.right + 20 &&
+                                          e.clientY >= nextRect.top - 20 && e.clientY <= prevRect.bottom + 20;
+                    nextButton.style.opacity = (x > width - proximity || nearNextButton) ? '0.9' : '0';
+                });
+
+                imagesDiv.addEventListener('mouseleave', () => {
+                    imagesDiv.querySelector('.prev').style.opacity = '0';
+                    imagesDiv.querySelector('.next').style.opacity = '0';
+                });
+
+                imagesDiv.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('nav-button') || e.target.classList.contains('dot')) return;
+                    const project = imagesDiv.closest('.project');
+                    const images = JSON.parse(project.dataset.images);
+                    const imgElement = project.querySelector('img');
+                    let currentIndex = parseInt(project.dataset.currentIndex) || 0;
+                    const nextIndex = (currentIndex + 1) % images.length;
+                    imgElement.src = images[nextIndex];
+                    project.dataset.currentIndex = nextIndex;
+                    updateActiveDot(project, nextIndex);
+                    clearInterval(project.dataset.interval);
+                });
+            });
+        }
+
+        renderProjects();
+    </script>
+</body>
+</html>
